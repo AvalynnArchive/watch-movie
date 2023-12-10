@@ -1,6 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie website</title>
+</head>
+
 <body>
-<iframe src="https://vidsrc.xyz/embed/movie?imdb=tt9603212" style="width: 100%; height: 100%;" frameborder="0" referrerpolicy="origin" allowfullscreen></iframe>
+    <input type="text" placeholder="Input your youtube url" name="URL" id="imdb_id" />
+    <button type="button" onclick="myFunction()" id="download">
+        Watch
+    </button>
+    <br/>
+    <iframe id="video" src="" width="100%" height="700" frameborder="0" referrerpolicy="origin"
+        allowfullscreen></iframe>
+
+    <script>
+        function myFunction() {
+            if (document.getElementById != null) {
+                let imdb = document.getElementById("imdb_id").value;
+                console.log(imdb);
+                document.getElementById("video").src =
+                    "https://vidsrc.me/embed/movie?imdb=" + encodeURIComponent(imdb);
+            }
+        }
+    </script>
 </body>
+
 </html>
