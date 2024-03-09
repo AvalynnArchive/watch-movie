@@ -1,89 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WatchMovie.ts</title>
-    <meta name="description" content="A website that converts Youtube videos into mp3 files. Made using Next.js">
-    <link rel="icon" href="/favicon.ico">
+    <meta
+      name="description"
+      content="A website that converts Youtube videos into mp3 files. Made using Next.js"
+    />
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body>
-    <div class="flex justify-center items-center flex-col pt-40 text-center font-bold lg:text-8xl text-6xl space-y-2">
-        <h1 class="text-black pb-10">
-            Watch <span class="text-red-400">Movies</span> From
-            <span class="text-red-400"> IMDB</span>
-        </h1>
+  </head>
+
+  <body>
+    <div
+      class="flex justify-center items-center flex-col pt-40 text-center font-bold lg:text-8xl text-6xl space-y-2"
+    >
+      <h1 class="text-black pb-10">
+        Watch <span class="text-red-400">Movies</span> For
+        <span class="text-red-400"> FREE</span>
+      </h1>
     </div>
     <div class="flex justify-center items-center flex-col text-center">
-        <h6 class="text-black pb-10">
-            Just Enter the <span class="text-blue-400">ID</span> of the
-            <span class="text-blue-400"> Movie from IMDB</span>
-        </h6>
+      <h6 class="text-black pb-5">
+        Just Enter the <span class="text-blue-400">ID</span> of the
+        <span class="text-blue-400"> Movie from IMDB/TMDB</span>
+      </h6>
+      <h6 class="pb-10">
+        <span class="text-red-600">
+          Note: VidSrc (all versions), SuperEmbed unfortunately have ADs</span
+        >
+      </h6>
     </div>
-    <div class="flex justify-center items-center flex-col text-center">
-        <img src="https://github.com/avalynndev/avalynndev/blob/patch-1/storage/ImdbPic.png?raw=true" class="rounded-xl">
-    </div>
-    <br>
     <center>
-        <div class="w-full max-w-xs">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                <div class="mb-4">
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline" id="youtubelink" type="text" placeholder="Input a valid Movie ID" autocomplete="off">
-                </div>
-                <div class="flex items-center justify-between">
-                    <button
-                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button" onclick="myFunction()"> <!-- Added w-full class to make button spread across -->
-                        Watch
-                    </button>
-                </div>
-            </form>
-        </div>
+      <div class="w-full max-w-xs pb-10">
+        <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+          <div class="mb-4">
+            <input
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="movieID"
+              type="text"
+              placeholder="Input a valid Movie ID"
+              autocomplete="off"
+            />
+          </div>
+          <div class="mb-4">
+            <label
+              for="provider"
+              class="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Select a provider:
+            </label>
+            <select
+              id="provider"
+              name="provider"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            >
+              <option value="vidsrc">VidSrc</option>
+              <option value="superembed">ADS❗SuperEmbed</option>
+              <option value="vidsrc1">VidPlay</option>
+              <option value="vidsrc2">VidSrc 2</option>
+              <option value="vidsrc3">VidSrc 3</option>
+            </select>
+          </div>
+
+          <div class="flex items-center justify-between">
+            <button
+              class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
+              type="button"
+              onclick="WatchFuntion()"
+            >
+              Watch
+            </button>
+          </div>
+        </form>
+      </div>
     </center>
-    <br>
-    <br>
     <center>
-        <div class="items-center">
-            <div>
-                <div class="items-center">
-                    <iframe id="buttonApi" referrerpolicy="origin" src="" height="1" width="1" allowfullscreen></iframe>
-                </div>
-            </div>
+      <div class="items-center">
+        <div>
+          <div class="items-center">
+            <iframe
+              id="IframeTag"
+              referrerpolicy="origin"
+              src=""
+              height="1"
+              width="1"
+              allowfullscreen
+            ></iframe>
+          </div>
         </div>
+      </div>
     </center>
-    <br>
-    <br>
     <div class="flex flex-col justify-center">
-        <div class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white">
-            <div class="bg-white flex flex-col space-y-2 p-3">
-                <h3 class="font-black text-grey-800 md:text-3xl text-xl text-center">
-                    ❗IMPORTANT NOTICE❗
-                </h3>
-                <br>
-                <p class="md:text-lg text-gray-500 text-base">
-                    We does not host any files, it merely links to 3rd party services.
-                    Legal issues should be taken up with the file hosts and providers.
-                    WE are not responsible for any media files shown by the video
-                    providers
-                </p>
-            </div>
+      <div
+        class="relative flex flex-col md:flex-row md:space-x-5 space-y-3 md:space-y-0 rounded-xl shadow-lg p-3 max-w-xs md:max-w-3xl mx-auto border border-white bg-white"
+      >
+        <div class="bg-white flex flex-col space-y-2 p-3">
+          <h3
+            class="font-black text-grey-800 md:text-3xl text-xl text-center pb-4"
+          >
+            ❗IMPORTANT NOTICE❗
+          </h3>
+          <p class="md:text-lg text-gray-500 text-base">
+            We does not host any files, it merely links to 3rd party services.
+            Legal issues should be taken up with the file hosts and providers.
+            WE are not responsible for any media files shown by the video
+            providers
+          </p>
         </div>
+      </div>
     </div>
-    <br>
-    <br>
     <script>
-        function myFunction() {
-            if (document.getElementById != null) {
-                let link = document.getElementById("youtubelink").value;
-                console.log(link);
-                let iframe = document.getElementById("buttonApi");
-                iframe.setAttribute("src", "https://vidsrc.me/embed/movie?imdb=" + link);
-                iframe.style.width = "1000px"; // Change the width value as desired
-                iframe.style.height = "500px"; // Change the height value as desired
+      function WatchFuntion() {
+        var selectedValue = document.getElementById("provider").value;
+        if (document.getElementById("movieID").value == "") {
+          alert("NEEEEEEEeeeeeeeeeeeeee");
+        } else {
+          if (selectedValue == "vidsrc") {
+            let movieID = document.getElementById("movieID").value;
+            let iframe = document.getElementById("IframeTag");
+            iframe.setAttribute(
+              "src",
+              "https://vidsrc.in/embed/movie/" + movieID
+            );
+            iframe.style.width = "1000px";
+            iframe.style.height = "500px";
+          }
+          if (selectedValue == "vidsrc2") {
+            let movieID = document.getElementById("movieID").value;
+            let iframe = document.getElementById("IframeTag");
+            iframe.setAttribute(
+              "src",
+              "https://vidsrc.xyz/embed/movie/" + movieID
+            );
+            iframe.style.width = "1000px";
+            iframe.style.height = "500px";
+          }
+          if (selectedValue == "vidsrc3") {
+            let movieID = document.getElementById("movieID").value;
+            let iframe = document.getElementById("IframeTag");
+            iframe.setAttribute(
+              "src",
+              "https://vidsrc.net/embed/movie/" + movieID
+            );
+            iframe.style.width = "1000px";
+            iframe.style.height = "500px";
+          }
+          if (selectedValue == "vidsrc1") {
+            let movieID = document.getElementById("movieID").value;
+            let iframe = document.getElementById("IframeTag");
+            iframe.setAttribute(
+              "src",
+              "https://vidsrc.to/embed/movie/" + movieID
+            );
+            iframe.style.width = "1000px";
+            iframe.style.height = "500px";
+          }
+          if (selectedValue == "superembed") {
+            let movieID = document.getElementById("movieID").value;
+            let iframe = document.getElementById("IframeTag");
+            if (movieID.includes("tt")) {
+              iframe.setAttribute(
+                "src",
+                "https://multiembed.mov/?video_id=" + movieID
+              );
+              iframe.style.width = "1000px";
+              iframe.style.height = "500px";
+            } else {
+              iframe.setAttribute(
+                "src",
+                "https://multiembed.mov/?video_id=" + movieID + "&tmdb=1"
+              );
+              iframe.style.width = "1000px";
+              iframe.style.height = "500px";
             }
+          }
         }
+      }
     </script>
-</body>
+  </body>
 </html>
